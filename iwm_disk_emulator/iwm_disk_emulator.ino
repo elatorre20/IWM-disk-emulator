@@ -8,6 +8,7 @@
  * Thanks to the Rhode Island Computer Museum for their hardware and assistance.
  */
 #include <stdio.h>
+#include <stdint.h>
 #include "pico/stdlib.h"
 #include "pico/binary_info.h"
 
@@ -34,6 +35,13 @@ const uint WR = 9; //19. WR, connected through an inverter to WRDATA on the cont
 
 const uint pins[10] = {PWM, PH0, PH1, PH2, PH3, WRREQ, HDSEL, ENBL2, RD, WR};
 
+//registers
+
+unsigned char state = 0;
+
+//misc
+
+unsigned int64_t clk = 0; //for counting system clock cycles. Will overflow after approximately 73117 years
 
 void setup() {
   for(uint i: pins){
