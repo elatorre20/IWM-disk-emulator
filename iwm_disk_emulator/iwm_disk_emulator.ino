@@ -38,6 +38,7 @@ const uint pins[10] = {PWM, PH0, PH1, PH2, PH3, WRREQ, HDSEL, ENBL2, RD, WR};
 //registers
 
 unsigned char state = 0;
+unsigned char phase = 0; //only 4 phase lines, so we only care about the first nibble
 
 //misc
 
@@ -45,8 +46,7 @@ unsigned int64_t clk = 0; //for counting system clock cycles. Will overflow afte
 
 void setup() {
   for(uint i: pins){
-    gpio_init(i);
-    gpio_set_dir(i, 0);
+    pinMode(i, OUTPUT);
   }
   
   
